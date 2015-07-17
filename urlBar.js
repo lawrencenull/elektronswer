@@ -27,7 +27,7 @@ bar.addEventListener("keypress", function(e) {
   }
 }, false);
 
-webview.addEventListener('did-stop-loading', function(status) {
+webview.addEventListener('did-finish-load', function() {
   document.getElementById("loadingOverlay").style.opacity = 0;
   window.setTimeout(function() {
     document.getElementById("loadingOverlay").style.display = 'none';
