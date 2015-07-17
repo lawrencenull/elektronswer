@@ -22,5 +22,9 @@ bar.addEventListener("keypress", function(e) {
 }, false);
 
 webview.addEventListener('did-stop-loading', function(status) {
+  document.getElementById("loadingOverlay").style.opacity = 0;
   bar.value = webview.getUrl();
+});
+webview.addEventListener('did-start-loading', function(status) {
+  document.getElementById("loadingOverlay").style.opacity = 100;
 });
