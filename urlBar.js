@@ -13,9 +13,14 @@ if (typeof String.prototype.contains === 'undefined') {
   };
 }
 
-window.addEventListener('onload', function() {
-  prefPane.style.height = window.height - 50;
-}, false);
+function onLoad() {
+  console.log("Loaded!");
+  var body = document.body, html = document.documentElement;
+
+  var height = Math.max( body.scrollHeight, body.offsetHeight,
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+  prefPane.style.height = (height - 50) + 'px';
+}
 
 function goToPage() {
   var url;
@@ -69,6 +74,7 @@ function goForw() {
 }
 
 function togglePref() {
+  prefPane.style.height = window.height - 50;
   if (!prefPaneOut) {
     prefPane.style.left="75%";
   } else {

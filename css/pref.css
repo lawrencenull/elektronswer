@@ -1,0 +1,24 @@
+.horizList li {
+  display: block;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+.themeBtn {
+  font-size: 18px;
+  margin: 0px;
+  border: none;
+}
+
+.leftBtn {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none !important;
+}
+
+.rightBtn {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-left: none !important;
+}
