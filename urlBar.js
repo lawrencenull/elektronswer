@@ -23,8 +23,21 @@ bar.addEventListener("keypress", function(e) {
 
 webview.addEventListener('did-stop-loading', function(status) {
   document.getElementById("loadingOverlay").style.opacity = 0;
+  window.setTimeout(function() {
+    document.getElementById("loadingOverlay").style.display = 'none';
+  }, 500);
   bar.value = webview.getUrl();
 });
 webview.addEventListener('did-start-loading', function(status) {
+  document.getElementById("loadingOverlay").style.display = 'block';
   document.getElementById("loadingOverlay").style.opacity = 100;
+
 });
+
+function goBack() {
+  webview.goBack();
+}
+
+function goForw() {
+  webview.goForward();
+}
