@@ -4,6 +4,8 @@ var bar = document.getElementsByName('urlBar')[0];
 var button = document.getElementsByName('button');
 var webview = document.getElementById("pageView");
 
+var doneLoading = false;
+
 if (typeof String.prototype.contains === 'undefined') {
   String.prototype.contains = function(it) {
     return this.indexOf(it) != -1;
@@ -27,7 +29,7 @@ bar.addEventListener("keypress", function(e) {
   }
 }, false);
 
-webview.addEventListener('did-finish-load', function() {
+webview.addEventListener('did-stop-loading', function() {
   document.getElementById("loadingOverlay").style.opacity = 0;
   window.setTimeout(function() {
     document.getElementById("loadingOverlay").style.display = 'none';
@@ -36,8 +38,13 @@ webview.addEventListener('did-finish-load', function() {
 });
 
 webview.addEventListener('did-start-loading', function(status) {
-  document.getElementById("loadingOverlay").style.display = 'block';
-  document.getElementById("loadingOverlay").style.opacity = 100;
+  if (webview.isWaitingForResponse()) {
+    doneLoading = false;
+    document.getElementById("loadingOverlay").style.display = 'block';
+    document.getElementById("loadingOverlay").style.opacity = 100;
+  } else {
+    doneLoading = true;
+  }
 });
 
 webview.addEventListener('page-title-set', function(e) {
