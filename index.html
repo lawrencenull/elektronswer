@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/dark.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
+    <!-- NOTE: NavBar -->
     <header>
       <ul id="navBar">
         <li>
@@ -17,14 +18,21 @@
         </li>
         <li><input type="url" name="urlBar" id="urlBar" onClick="this.select();"/></li>
         <li><button type="button" name="button" onclick="reload();">Go!</button></li>
+        <li><button type="button" name="pref" onclick="togglePref();">pref</button></li>
       </ul>
     </header>
+
+    <!-- NOTE: webview -->
     <section>
       <div id="loadingOverlay">
         <img src="css/ring-alt.svg">
       </div>
       <webview src="http://github.com" id="pageView"></webview>
     </section>
+
+    <iframe class="pref" src="pref.html"></iframe>
+
+    <!-- NOTE: Main Script -->
     <script src="urlBar.js">
     </script>
   </body>

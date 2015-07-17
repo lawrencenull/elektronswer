@@ -1,9 +1,10 @@
 var ipc = require('ipc');
 
 var bar = document.getElementsByName('urlBar')[0];
-var button = document.getElementsByName('button');
 var webview = document.getElementById("pageView");
+var prefPane = document.getElementsByClassName('pref')[0];
 
+var prefPaneOut = false;
 var doneLoading = false;
 
 if (typeof String.prototype.contains === 'undefined') {
@@ -11,6 +12,10 @@ if (typeof String.prototype.contains === 'undefined') {
     return this.indexOf(it) != -1;
   };
 }
+
+window.addEventListener('onload', function() {
+  prefPane.style.height = window.height - 50;
+}, false);
 
 function goToPage() {
   var url;
@@ -51,10 +56,23 @@ webview.addEventListener('page-title-set', function(e) {
     document.title = e.title + " - Electronswer 1.0";
 });
 
+function reload() {
+  webview.reload();
+}
+
 function goBack() {
   webview.goBack();
 }
 
 function goForw() {
   webview.goForward();
+}
+
+function togglePref() {
+  if (!prefPaneOut) {
+    prefPane.style.left="75%";
+  } else {
+    prefPane.style.left="100%";
+  }
+  prefPaneOut = !prefPaneOut;
 }
