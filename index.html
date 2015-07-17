@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SolBrowser 1.0</title>
+    <link rel="stylesheet" href="css/index.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <header>
+      <ul id="navBar">
+        <li>
+          <ul>
+            <li><button type="button" name="back" id="back" onclick="goBack();">&lt;-</button></li>
+            <li><button type="button" name="forw" id="forw" onclick="goForw();">-&gt;</button></li>
+          </ul>
+        </li>
+        <li><input type="url" name="urlBar" id="urlBar" onClick="this.select();"/></li>
+        <li><button type="button" name="button" onclick="reload();">Go!</button></li>
+      </ul>
+    </header>
+    <section>
+      <div id="loadingOverlay">
+        <img src="css/ring-alt.svg">
+      </div>
+      <webview src="http://github.com" id="pageView"></webview>
+    </section>
+    <script src="urlBar.js">
+    </script>
+  </body>
+</html>
