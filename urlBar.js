@@ -12,7 +12,7 @@ if (typeof String.prototype.contains === 'undefined') {
 
 function goToPage() {
   var url;
-  if (!bar.value.contains("http://") && !bar.value.contains("https://")) {
+  if (!bar.value.contains("http://") && !bar.value.contains("https://") && !bar.value.contains("file://")) {
     url = "http://" + bar.value;
   } else {
     url = bar.value;
@@ -34,10 +34,14 @@ webview.addEventListener('did-stop-loading', function(status) {
   }, 500);
   bar.value = webview.getUrl();
 });
+
 webview.addEventListener('did-start-loading', function(status) {
   document.getElementById("loadingOverlay").style.display = 'block';
   document.getElementById("loadingOverlay").style.opacity = 100;
+});
 
+webview.addEventListener('page-title-set', function(e) {
+    document.title = e.title + " - Electronswer 1.0";
 });
 
 function goBack() {
