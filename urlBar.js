@@ -4,9 +4,15 @@ var bar = document.getElementsByName('urlBar')[0];
 var button = document.getElementsByName('button');
 var webview = document.getElementById("pageView");
 
+if (typeof String.prototype.contains === 'undefined') {
+  String.prototype.contains = function(it) {
+    return this.indexOf(it) != -1;
+  };
+}
+
 function goToPage() {
   var url;
-  if (bar.value.indexOf("http://") < 0 || bar.value.indexOf("https://")) {
+  if (!bar.value.contains("http://") && !bar.value.contains("https://")) {
     url = "http://" + bar.value;
   } else {
     url = bar.value;
