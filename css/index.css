@@ -31,9 +31,17 @@ header {
 #urlBar {
   height: 20px;
   border-radius: 2.5px;
-  border: 1px solid rgb(229, 229, 229);
+  padding: 2.5px;
+  padding-left: 5px;
   width: 80%;
   display: inline;
+}
+
+button {
+    border-radius: 2.5px;
+    padding: 4.5px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
 #loadingOverlay {

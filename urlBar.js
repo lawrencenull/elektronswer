@@ -1,4 +1,6 @@
 var ipc = require('ipc');
+var fs = require('fs');
+var config = require('./config.js');
 
 var bar = document.getElementsByName('urlBar')[0];
 var webview = document.getElementById("pageView");
@@ -27,8 +29,10 @@ function onResize() {
 
 function goToPage() {
   var url;
-  if (!bar.value.contains("http://") && !bar.value.contains("https://") && !bar.value.contains("file://")) {
+  if (!bar.value.contains("http://") && !bar.value.contains("https://") && !bar.value.contains("file://") && !bar.value.contains('g:')) {
     url = "http://" + bar.value;
+  } else if (bar.value.contains("g:")) {
+    url = 'https://www.google.se/#q=' + bar.value.substr(2);
   } else {
     url = bar.value;
   }

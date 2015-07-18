@@ -1,11 +1,30 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
 header {
   background-color: #545454;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
 }
 
 #prefBody {
   background-color: #545454;
   color: rgb(218, 218, 218);
   text-align: center;
+}
+
+#urlBar {
+  background-color: #818181;
+  color: rgb(218, 218, 218);
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  border: 1px solid #404040;
+}
+
+button {
+  border: 1px solid #404040;
+  background-color: #818181;
+  color: rgb(218, 218, 218);
 }
 
 .prefH1 {

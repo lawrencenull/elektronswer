@@ -1,13 +1,6 @@
-var fs = window.parent.require('fs');
-var config;
-fs.readFile('user/config.json', 'utf8', function (err, data) {
-  if (err) {
-    config = {}
-    throw err;
-    return;
-  }
-  config = JSON.parse(data);
-});
+var require = window.parent.require;
+var config = require('./config.js');
+
 
 function setTheme(theme) {
   if (theme === 'dark') {
@@ -17,11 +10,7 @@ function setTheme(theme) {
     document.getElementsByName('light')[0].classList.add('selectedBtn');
     document.getElementsByName('dark')[0].classList.remove('selectedBtn');
   }
-  config.theme = theme;
-  fs.open('user/config.json', 'w', function(err, fd) {
-    if (err) throw err;
-    fs.write(fd, JSON.stringify(config), function(err, written, string) {
-      if (err) throw err;
-    });
-  });
+  conf = config.getConfig();
+  conf.theme = theme;
+  config.writeConfig(conf);
 }
