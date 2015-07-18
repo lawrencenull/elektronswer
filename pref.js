@@ -1,6 +1,4 @@
-window['require'] = window.parent['require'];
-var config = require('./config.js');
-
+var config = window.parent.require('./config.js');
 
 function setTheme(theme) {
   if (theme === 'dark') {
@@ -10,7 +8,5 @@ function setTheme(theme) {
     document.getElementsByName('light')[0].classList.add('selectedBtn');
     document.getElementsByName('dark')[0].classList.remove('selectedBtn');
   }
-  conf = config.getConfig();
-  conf.theme = theme;
-  config.writeConfig(conf);
+  config.setProperty('theme', theme);
 }
