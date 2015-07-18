@@ -7,14 +7,21 @@
     <link rel="stylesheet" href="css/dark.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body id="prefBody">
-    <h1 class="prefH1">Hello, world!</h1>
+    <h1 class="prefH1">Preferences</h1>
     <table>
       <tr>
-        <td class="horizList" colspan="2">
+        <td class="horizList">
           <ul>
             <li><button type="button" name="dark" class="themeBtn leftBtn selectedBtn" onclick="setTheme('dark');">Dark</button></li>
             <li><button type="button" name="light" class="themeBtn rightBtn" onclick="setTheme('light');">Light</button></li>
           </ul>
+        </td>
+      </tr>
+      <tr>
+        <td id="hompageSect">
+          <label for="hompage">Homepage</label>
+          <input type="url" name="homepage"></input>
+          <button name="setHomepage" onclick="setHomepage();" id="homepageBtn">Set</button>
         </td>
       </tr>
     </table>

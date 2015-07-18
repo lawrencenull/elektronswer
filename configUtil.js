@@ -1,22 +1,15 @@
 var fs = require('fs-extra');
 
-var configInternal = {};
-
 module.exports = {
-  config: configInternal,
-  initConfig: function() {
+  setProperty: function(prop, value) {
     console.log('Get config! ' +__dirname + '/user/config.json');
-    configInternal = fs.readJsonSync(__dirname + '/user/config.json');
+    var configInternal = fs.readJsonSync(__dirname + '/user/config.json');
+    configInternal[prop] = value;
     console.log(configInternal);
-  },
-  writeConfig: function() {
     fs.writeJsonSync(__dirname + '/user/config.json', configInternal);
   },
-  setProperty: function(prop, value) {
-    configInternal[prop] = value;
-    config.writeConfig();
-  },
   getProperty: function(prop) {
+    var configInternal = fs.readJsonSync(__dirname + '/user/config.json');
     return configInternal[prop];
   }
 };

@@ -3,15 +3,23 @@
   float: left;
   padding: 0px;
   margin: 0px;
+  width: 40%;
 }
 
 .horizList ul {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0px;
+  width: 100%;
+  padding-left: 11%;
+  padding-right: 10%;
 }
 
 .horizList {
+  width: 100%;
+}
+
+table {
+  padding: 0px;
+  margin: 0px;
   width: 100%;
 }
 
@@ -22,6 +30,7 @@
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  width: 100%;
 }
 
 .leftBtn {
@@ -34,4 +43,31 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border-left: none !important;
+}
+
+td {
+  padding-bottom: 30px;
+}
+
+#homepageSect {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+input[type="url"] {
+  flex-grow: 2;
+  width: 100%;
+}
+
+#homepageBtn {
+  height: 24px;
+  float: right;
+  flex-grow: 1
+}
+
+label {
+  float: left;
+  flex-grow: 1.5;
 }

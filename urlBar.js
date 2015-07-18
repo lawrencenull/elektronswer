@@ -1,6 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
-var config = require('./config.js');
+var config = require('./configUtil.js');
 
 var bar = document.getElementsByName('urlBar')[0];
 var webview = document.getElementById("pageView");
@@ -16,6 +16,12 @@ if (typeof String.prototype.contains === 'undefined') {
 }
 
 function onLoad() {
+  var home = config.getProperty('home');
+  if (home) {
+    webview.setAttribute("src", home);
+  } else {
+    webview.setAttribute("src", "https://www.google.se");
+  }
   onResize();
 }
 

@@ -1,4 +1,4 @@
-var config = window.parent.require('./config.js');
+var config = window.parent.require('./configUtil.js');
 
 function setTheme(theme) {
   if (theme === 'dark') {
@@ -9,4 +9,8 @@ function setTheme(theme) {
     document.getElementsByName('dark')[0].classList.remove('selectedBtn');
   }
   config.setProperty('theme', theme);
+}
+
+function setHomepage() {
+  config.setProperty('home', document.getElementsByName('homepage')[0].value);
 }
