@@ -8,18 +8,14 @@
   </head>
   <body onload="onLoad();" onresize="onResize();">
     <!-- NOTE: NavBar -->
-    <header>
-      <ul id="navBar">
-        <li>
-          <ul>
-            <li><button type="button" name="back" id="back" onclick="goBack();"></button></li>
-            <li><button type="button" name="forw" id="forw" onclick="goForw();"></button></li>
-          </ul>
-        </li>
-        <li><input type="url" name="urlBar" id="urlBar" onClick="this.select();"/></li>
-        <li><button type="button" name="button" onclick="reload();">Go!</button></li>
-        <li><button type="button" name="pref" id="prefBtn" onclick="togglePref();"></button></li>
-      </ul>
+    <header id="header">
+        <ul>
+          <li><img src="img/left_pil.svg" name="back" class="navBtn" id="back" onclick="goBack();"></img></li>
+          <li><img src="img/right_pil.svg" name="forw" class="navBtn" id="forw" onclick="goForw();"></img</li>
+        </ul>
+        <input type="url" name="urlBar" id="urlBar" onClick="this.select();"/>
+        <button type="button" name="button" onclick="reload();">Go!</button>
+        <img src="img/pref.svg" name="pref" class="navBtn" id="prefBtn" onclick="togglePref();"></img>
     </header>
 
     <!-- NOTE: webview -->
