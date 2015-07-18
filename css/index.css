@@ -44,6 +44,18 @@ button {
     padding-right: 9px;
 }
 
+#back {
+    background-image: url(img/left_pil.svg);
+}
+
+#forw {
+    background-image: url(img/right_pil.svg);
+}
+
+#prefBtn {
+    background-image: url(img/pref.svg);
+}
+
 #loadingOverlay {
   position: fixed;
   top: auto;
