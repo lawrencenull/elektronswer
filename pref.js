@@ -1,4 +1,4 @@
-var require = window.parent.require;
+window['require'] = window.parent['require'];
 var config = require('./config.js');
 
 
