@@ -5,18 +5,20 @@ header {
 #prefBody {
   background-color: #545454;
   color: rgb(218, 218, 218);
+  text-align: center;
+}
+
+.prefH1 {
+  border-bottom: 1px solid rgb(218, 218, 218);
 }
 
 .themeBtn {
     color: rgb(218, 218, 218);
     background-color: #818181;
     border: 2px solid #404040;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .selectedBtn {
-  background-color: #404040;
-  border: 2px solid #818181;
+  background-color: #69aa00;
+  border: 2px solid #404040;
 }

@@ -14,7 +14,10 @@ if (typeof String.prototype.contains === 'undefined') {
 }
 
 function onLoad() {
-  console.log("Loaded!");
+  onResize();
+}
+
+function onResize() {
   var body = document.body, html = document.documentElement;
 
   var height = Math.max( body.scrollHeight, body.offsetHeight,

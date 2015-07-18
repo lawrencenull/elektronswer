@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/index.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="css/dark.css" media="screen" title="no title" charset="utf-8">
   </head>
-  <body onload="onLoad();">
+  <body onload="onLoad();" onresize="onResize();">
     <!-- NOTE: NavBar -->
     <header>
       <ul id="navBar">
@@ -30,7 +30,8 @@
       <webview src="http://github.com" id="pageView"></webview>
     </section>
 
-    <iframe class="pref" src="pref.html"></iframe>
+    <!-- TODO: PreloadScript injecting node -->
+    <iframe sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts" class="pref" src="pref.html"></iframe>
 
     <!-- NOTE: Main Script -->
     <script src="urlBar.js">
