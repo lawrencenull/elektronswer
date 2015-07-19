@@ -22,7 +22,15 @@ function onLoad() {
   } else {
     webview.setAttribute("src", "file://" + __dirname + "/pages/startPage.html");
   }
+  setTheme();
   onResize();
+}
+
+function setTheme() {
+  var theme = config.getProperty('theme');
+  if (theme && theme !== "") {
+    document.getElementsByName('theme')[0].setAttribute('href', 'css/' + theme + '.css');
+  }
 }
 
 function onResize() {
