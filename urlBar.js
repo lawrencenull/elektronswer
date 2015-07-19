@@ -5,6 +5,7 @@ var config = require('./configUtil.js');
 var bar = document.getElementsByName('urlBar')[0];
 var webview = document.getElementById("pageView");
 var prefPane = document.getElementsByClassName('pref')[0];
+var historyPane = document.getElementById("history");
 
 var prefPaneOut = false;
 var doneLoading = false;
@@ -33,12 +34,30 @@ function setTheme() {
   }
 }
 
+function getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+    }
+    return { top: _y, left: _x };
+}
+
 function onResize() {
   var body = document.body, html = document.documentElement;
 
   var height = Math.max( body.scrollHeight, body.offsetHeight,
                        html.clientHeight, html.scrollHeight, html.offsetHeight );
+
   prefPane.style.height = (height - 50) + 'px';
+  var rect = bar.getBoundingClientRect();
+  historyPane.style.height = (height*0.25) + 'px';
+  historyPane.style.width = (rect.right - rect.left) + 'px';
+  historyPane.style.top = rect.bottom + 'px';
+  historyPane.style.left = getOffset(bar).left + 'px';
+
 }
 
 function goToPage() {
@@ -59,6 +78,18 @@ bar.addEventListener("keypress", function(e) {
     goToPage();
   }
 }, false);
+
+bar.addEventListener('focus', function() {
+  historyPane.style.display = 'block';
+  historyPane.style.opacity = 100;
+});
+
+bar.addEventListener('blur', function() {
+  historyPane.style.opacity = 0;
+  window.setTimeout(function() {
+    historyPane.style.display = 'none';
+  }, 250);
+});
 
 document.addEventListener("keyup", function(e) {
   if (e.keyCode == 123) {
