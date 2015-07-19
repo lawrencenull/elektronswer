@@ -17,10 +17,10 @@ if (typeof String.prototype.contains === 'undefined') {
 
 function onLoad() {
   var home = config.getProperty('home');
-  if (home) {
+  if (home && home !== "") {
     webview.setAttribute("src", home);
   } else {
-    webview.setAttribute("src", "https://www.google.se");
+    webview.setAttribute("src", "file://" + __dirname + "/pages/startPage.html");
   }
   onResize();
 }
