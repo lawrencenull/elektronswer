@@ -31,6 +31,8 @@ function setTheme() {
   var theme = config.getProperty('theme');
   if (theme && theme !== "") {
     document.getElementsByName('theme')[0].setAttribute('href', 'css/' + theme + '.css');
+  } else {
+    config.setProperty('theme', 'dark');
   }
 }
 
