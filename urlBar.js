@@ -75,6 +75,11 @@ function goToPage() {
 
 bar.addEventListener("keypress", function(e) {
   if (e.keyCode == 13) {
+    historyPane.style.opacity = 0;
+    window.setTimeout(function() {
+      historyPane.style.display = 'none';
+    }, 250);
+    bar.blur();
     goToPage();
   }
 }, false);
