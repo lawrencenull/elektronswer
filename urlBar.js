@@ -1,5 +1,5 @@
 var ipc = require('ipc');
-var fs = require('fs');
+var fs = require('fs-extra');
 var config = require('./configUtil.js');
 
 var bar = document.getElementsByName('urlBar')[0];
@@ -60,6 +60,12 @@ bar.addEventListener("keypress", function(e) {
   }
 }, false);
 
+document.addEventListener("keyup", function(e) {
+  if (e.keyCode == 123) {
+    webview.openDevTools();
+  }
+}, false);
+
 webview.addEventListener('did-stop-loading', function() {
   document.getElementById("loadingOverlay").style.opacity = 0;
   window.setTimeout(function() {
@@ -81,6 +87,20 @@ webview.addEventListener('did-start-loading', function(status) {
 webview.addEventListener('page-title-set', function(e) {
     document.title = e.title + " - Electronswer 1.0";
 });
+
+webview.addEventListener('dom-ready', function() {
+  injectScrollbar();
+})
+
+function injectScrollbar() {
+  var theme = config.getProperty('theme');
+  if (theme && theme !== "") {
+    fs.readFile(__dirname + "/css/" + theme + "_scroll.css", {"encoding": "utf-8"}, function(err, data) {
+      //if (err) throw err;
+      webview.insertCSS(data);
+    });
+  }
+}
 
 function reload() {
   webview.reload();

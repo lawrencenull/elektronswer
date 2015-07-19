@@ -13,6 +13,7 @@ function setTheme(theme) {
   config.setProperty('theme', theme);
   loadTheme();
   window.parent.setTheme();
+  window.parent.injectScrollbar();
 }
 
 function setHomepage() {
