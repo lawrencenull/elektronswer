@@ -63,6 +63,7 @@ button {
 }
 
 .historySel {
-    background-color: #69aa00;
-    color: rgb(70, 70, 70);
+    background-color: #69aa00 !important;
+    background: #69aa00 !important;
+    color: rgb(70, 70, 70) !important;
 }
