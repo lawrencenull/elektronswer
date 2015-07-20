@@ -64,7 +64,6 @@ function bubbleSort(arr){
    return arr;
 }
 
-
 function onResize() {
   var body = document.body, html = document.documentElement;
 
@@ -118,21 +117,16 @@ function updateHistory() {
   var out = "<ul>";
   var body = document.body, html = document.documentElement;
   var count = 0;
-  var hist = [];
-  var cont = {};
-
   Object.keys(historyUtil.getHistory()).forEach(function(element, index) {
-    var entry = historyUtil.getHistoryEntry(element);
-    console.log('Entry: ' + entry);
-    hist.push(entry);
-    console.log('ElemSort: ' + element);
-    cont[entry] = element;
+    if (element.contains(bar.value)) {
+      if ((index * 25 + 25) < Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) {
+        out += '<li name="history">' + element + "</li>"
+        count++;
+      }
+    }
   });
 
-  console.log(hist);
-  console.log(bubbleSort(hist));
-
-  var histOut = bubbleSort(hist);
+  /*var histOut = bubbleSort(hist);
   var j = 0;
   for (var i = 0; i < histOut.length; i++) {
     if (cont[histOut[i]].contains(bar.value)) {
@@ -142,7 +136,7 @@ function updateHistory() {
         count++;
       }
     }
-  }
+  }*/
   out += "</ul>"
 
   historyPane.innerHTML = out;
