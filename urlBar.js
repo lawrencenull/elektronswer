@@ -119,24 +119,30 @@ function updateHistory() {
   var body = document.body, html = document.documentElement;
   var count = 0;
   var hist = [];
+  var cont = {};
 
   Object.keys(historyUtil.getHistory()).forEach(function(element, index) {
     var entry = historyUtil.getHistoryEntry(element);
-    hist[entry[0]] = entry[1];
+    console.log('Entry: ' + entry);
+    hist.push(entry);
+    console.log('ElemSort: ' + element);
+    cont[entry] = element;
   });
 
   console.log(hist);
   console.log(bubbleSort(hist));
 
-  Object.keys(bubbleSort(hist)).forEach(function(element, index) {
-    console.log("Found " + element + " : " + index);
-    console.log(Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25);
-    if ((index * 25 + 25) < Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) {
-      console.log("Size!");
-      out += '<li name="history">' + element + "</li>"
-      count++;
+  var histOut = bubbleSort(hist);
+  var j = 0;
+  for (var i = 0; i < histOut.length; i++) {
+    if (cont[histOut[i]].contains(bar.value)) {
+      j++;
+      if ((j * 25 + 25) < Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) {
+        out += '<li name="history">' + cont[histOut[i]] + "</li>"
+        count++;
+      }
     }
-  });
+  }
   out += "</ul>"
 
   historyPane.innerHTML = out;
