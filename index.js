@@ -4,6 +4,10 @@ var ipc = require('ipc');
 var fs = require('fs-extra');
 
 app.on('ready', function() {
+  if (!fs.existsSync(__dirname + "/user")) {
+    fs.mkdirSync(__dirname + "/user");
+  }
+
   if (!fs.existsSync(__dirname + "/user/config.json")) {
     fs.writeJsonSync(__dirname + "/user/config.json", {});
   }
