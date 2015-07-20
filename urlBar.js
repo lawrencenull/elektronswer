@@ -1,6 +1,7 @@
 var ipc = require('ipc');
 var fs = require('fs-extra');
 var config = require('./configUtil.js');
+var historyUtil = require('./historyUtil.js');
 
 var bar = document.getElementsByName('urlBar')[0];
 var webview = document.getElementById("pageView");
@@ -9,6 +10,7 @@ var historyPane = document.getElementById("history");
 
 var prefPaneOut = false;
 var doneLoading = false;
+var curHistory = 0;
 
 if (typeof String.prototype.contains === 'undefined') {
   String.prototype.contains = function(it) {
@@ -47,6 +49,22 @@ function getOffset( el ) {
     return { top: _y, left: _x };
 }
 
+
+function bubbleSort(arr){
+   var len = arr.length;
+   for (var i = len-1; i>=0; i--){
+     for(var j = 1; j<=i; j++){
+       if(arr[j-1]>arr[j]){
+           var temp = arr[j-1];
+           arr[j-1] = arr[j];
+           arr[j] = temp;
+        }
+     }
+   }
+   return arr;
+}
+
+
 function onResize() {
   var body = document.body, html = document.documentElement;
 
@@ -71,22 +89,63 @@ function goToPage() {
   } else {
     url = bar.value;
   }
-
+  historyUtil.addHistory(url);
   webview.setAttribute("src", url);
 }
 
-bar.addEventListener("keypress", function(e) {
-  if (e.keyCode == 13) {
+bar.addEventListener("keyup", function(e) {
+  if (e.keyCode == 13) { // Enter
     historyPane.style.opacity = 0;
     window.setTimeout(function() {
       historyPane.style.display = 'none';
     }, 250);
     bar.blur();
     goToPage();
+  } else if (e.keyCode == 40) { //Down
+    document.getElementsByName('history')[curHistory].classList.remove('historySel');
+    curHistory++;
+    document.getElementsByName('history')[curHistory].classList.add('historySel');
+  } else if (e.keyCode == 38) { //Up
+    document.getElementsByName('history')[curHistory].classList.remove('historySel');
+    curHistory--;
+    document.getElementsByName('history')[curHistory].classList.add('historySel');
   }
 }, false);
 
+bar.addEventListener('input', updateHistory());
+
+function updateHistory() {
+  var out = "<ul>";
+  var body = document.body, html = document.documentElement;
+  var count = 0;
+  var hist = [];
+
+  Object.keys(historyUtil.getHistory()).forEach(function(element, index) {
+    var entry = historyUtil.getHistoryEntry(element);
+    hist[entry[0]] = entry[1];
+  });
+
+  console.log(hist);
+  console.log(bubbleSort(hist));
+
+  Object.keys(bubbleSort(hist)).forEach(function(element, index) {
+    console.log("Found " + element + " : " + index);
+    console.log(Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25);
+    if ((index * 25 + 25) < Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) {
+      console.log("Size!");
+      out += '<li name="history">' + element + "</li>"
+      count++;
+    }
+  });
+  out += "</ul>"
+
+  historyPane.innerHTML = out;
+  historyPane.style.height = Math.min(count*25, Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) + 'px';
+}
+
 bar.addEventListener('focus', function() {
+  updateHistory();
+
   historyPane.style.display = 'block';
   historyPane.style.opacity = 100;
 });

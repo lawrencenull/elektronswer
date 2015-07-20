@@ -13,15 +13,13 @@
           <li><img src="img/left_pil.svg" name="back" class="navBtn" id="back" onclick="goBack();"></img></li>
           <li><img src="img/right_pil.svg" name="forw" class="navBtn" id="forw" onclick="goForw();"></img</li>
         </ul>
-        <input type="url" name="urlBar" id="urlBar" onClick="this.select();"/>
+        <input type="url" name="urlBar" id="urlBar" oninput="updateHistory();" onclick="this.select();"/>
         <button type="button" name="button" onclick="reload();">Go!</button>
         <img src="img/pref.svg" name="pref" class="navBtn" id="prefBtn" onclick="togglePref();"></img>
     </header>
 
     <section id="history">
-      <ul>
-        <li>Hello, world!</li>
-      </ul>
+
     </section>
 
     <!-- NOTE: webview -->

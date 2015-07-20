@@ -61,3 +61,8 @@ button {
     background: linear-gradient( #818181, #9a9999);
     color: rgb(218, 218, 218);
 }
+
+.historySel {
+    background-color: #69aa00;
+    color: rgb(70, 70, 70);
+}
