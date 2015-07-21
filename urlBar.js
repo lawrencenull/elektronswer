@@ -99,7 +99,7 @@ bar.addEventListener("keydown", function(e) {
     curHistory = 0;
   }
 
-  if (e.keyCode == 40 && curHistory < document.getElementsByName('history').length-1) { //Down
+  if (e.keyCode == 40 && curHistory < (document.getElementsByName('history').length-1 || (curHistory == 0 && !inHistory))) { //Down
     console.log("Key down");
     if (curHistory == 0 && !inHistory) {
       document.getElementsByName('history')[curHistory].classList.add('historySel');
