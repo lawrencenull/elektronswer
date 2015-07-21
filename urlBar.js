@@ -90,6 +90,7 @@ function goToPage() {
     url = bar.value;
   }
   inHistory = false;
+  curHistory = 0;
   webview.setAttribute("src", url);
 }
 
