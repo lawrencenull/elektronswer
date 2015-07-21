@@ -1,13 +1,14 @@
 {
-  "name": "electronswer",
+  "name": "elektronswer",
+  "productName": "Elektronswer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "electron ."
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Rickard Doverfelt, Simon Johansson",
+  "license": "MIT",
   "devDependencies": {
     "electron-prebuilt": "^0.29.2",
     "fs-extra": "^0.22.1"

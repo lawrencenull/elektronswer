@@ -206,7 +206,7 @@ webview.addEventListener('did-start-loading', function(status) {
 });
 
 webview.addEventListener('page-title-set', function(e) {
-    document.title = e.title + " - Electronswer 1.0";
+    document.title = e.title + " - Elektronswer 1.0";
 });
 
 webview.addEventListener('dom-ready', function() {

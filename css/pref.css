@@ -72,3 +72,14 @@ label {
   float: left;
   flex-grow: 1.5;
 }
+
+#clrHistoryBtn {
+  font-size: 18px;
+  margin: 0px;
+  border: none;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  border-radius: 5px;
+}

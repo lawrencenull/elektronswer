@@ -1,6 +1,5 @@
 var config = window.parent.require('./configUtil.js');
-
-//Display current config in prefs
+var historyUtil = window.parent.require('./historyUtil.js');
 
 function setTheme(theme) {
   if (theme === 'dark') {
@@ -25,6 +24,10 @@ function loadTheme() {
   if (theme && theme !== "") {
     document.getElementsByName('theme')[0].setAttribute('href', 'css/' + theme + '.css');
   }
+}
+
+function clearHistory() {
+  historyUtil.clearHistory();
 }
 
 function onload() {

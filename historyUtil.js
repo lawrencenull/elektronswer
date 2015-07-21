@@ -53,5 +53,9 @@ module.exports = {
     console.log("Get history entry");
     var hist = fs.readJsonSync(__dirname + '/user/history.json');
     return hist[url];
+  },
+  clearHistory: function() {
+    var nada = {};
+    fs.writeJsonSync(__dirname + '/user/history.json', nada);
   }
 };
