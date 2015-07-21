@@ -45,8 +45,9 @@ module.exports = {
     fs.writeJsonSync(__dirname + '/user/history.json', history);
   },
   getHistory: function() {
-    console.log("Get history");
-    return sortObj(fs.readJsonSync(__dirname + '/user/history.json'), 'value');
+    console.log("Get history " + __dirname + '/user/history.json');
+    var out = sortObj(fs.readJsonSync(__dirname + '/user/history.json'), 'value', true);
+    return out;
   },
   getHistoryEntry: function(url) {
     console.log("Get history entry");
