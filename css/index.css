@@ -116,4 +116,5 @@ button {
   padding: 2.5px;
   margin: 0px;
   list-style: none;
+  overflow: hidden;
 }
