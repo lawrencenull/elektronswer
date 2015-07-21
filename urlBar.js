@@ -90,7 +90,6 @@ function goToPage() {
     url = bar.value;
   }
   inHistory = false;
-  historyUtil.addHistory(url);
   webview.setAttribute("src", url);
 }
 
@@ -147,9 +146,11 @@ function updateHistory() {
   var out = "<ul>";
   var body = document.body, html = document.documentElement;
   var count = 0;
+  var j = 0;
   Object.keys(historyUtil.getHistory()).forEach(function(element, index) {
     if (element.contains(bar.value)) {
-      if ((index * 25 + 25) < Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) {
+      j++;
+      if ((j * 25 ) < Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) {
         out += '<li name="history">' + element + "</li>"
         count++;
       }
@@ -186,6 +187,10 @@ webview.addEventListener('did-stop-loading', function() {
   window.setTimeout(function() {
     document.getElementById("loadingOverlay").style.display = 'none';
   }, 500);
+});
+
+webview.addEventListener('did-finish-load', function() {
+  historyUtil.addHistory(webview.getUrl());
   bar.value = webview.getUrl();
 });
 
