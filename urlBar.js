@@ -95,6 +95,10 @@ function goToPage() {
 }
 
 bar.addEventListener("keydown", function(e) {
+  if (curHistory == -1) {
+    curHistory = 0;
+  }
+
   if (e.keyCode == 40 && curHistory < document.getElementsByName('history').length-1) { //Down
     console.log("Key down");
     if (curHistory == 0 && !inHistory) {
@@ -110,15 +114,15 @@ bar.addEventListener("keydown", function(e) {
     bar.value = document.getElementsByName('history')[curHistory].innerHTML;
   } else if (e.keyCode == 38 && curHistory > -1) { //Up
     console.log("Key up");
-    e.preventDefault();
     document.getElementsByName('history')[curHistory].classList.remove('historySel');
-    curHistory--;
-    if (curHistory == -1 && inHistory) {
-      curHistory = 0;
+    if (curHistory == 0 && inHistory) {
       bar.value = document.getElementsByName('history')[curHistory].innerHTML;
+      curHistory = 0;
       inHistory = false;
       return;
     }
+    e.preventDefault();
+    curHistory--;
     document.getElementsByName('history')[curHistory].classList.add('historySel');
     bar.value = document.getElementsByName('history')[curHistory].innerHTML;
   }
