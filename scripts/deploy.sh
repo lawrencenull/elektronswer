@@ -1,12 +1,18 @@
 #!/bin/bash
 
+/home/travis/build/solvillan/elektronswer/Elektronswer-linux-ia32
+/home/travis/build/solvillan/elektronswer/Elektronswer-win32-ia32
+/home/travis/build/solvillan/elektronswer/Elektronswer-darwin-x64
+/home/travis/build/solvillan/elektronswer/Elektronswer-linux-x64
+/home/travis/build/solvillan/elektronswer/Elektronswer-win32-x64
+
 #Remove bogus license
-rm Elektronswer-*/LICENSE
+rm /home/travis/build/solvillan/elektronswer/Elektronswer-*/LICENSE
 
 ## Linux
 echo "Packing linux"
 #64Bit
-tar -zcvf elektronswer-linux64.tar.gz ../Elektronswer-linux-x64
+tar -zcvf elektronswer-linux64.tar.gz Elektronswer-linux-x64
 #32Bit
 tar -zcvf elektronswer-linux32.tar.gz ../Elektronswer-linux-ia32
 
