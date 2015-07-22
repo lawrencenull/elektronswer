@@ -6,21 +6,21 @@ rm Elektronswer-*/LICENSE
 ## Linux
 echo "Packing linux"
 #64Bit
-tar -zcvf elektronswer-linux64.tar.gz Elektronswer-linux-x64
+tar -zcvf elektronswer-linux64.tar.gz ../Elektronswer-linux-x64
 #32Bit
-tar -zcvf elektronswer-linux32.tar.gz Elektronswer-linux-ia32
+tar -zcvf elektronswer-linux32.tar.gz ../Elektronswer-linux-ia32
 
 ## Windows
 echo "Packing windows"
 #64Bit
-zip -r elektronswer-win64.zip Elektronswer-win32-x64
+zip -r elektronswer-win64.zip ../Elektronswer-win32-x64
 #32Bit
-zip -r elektronswer-win32.zip Elektronswer-win32-ia32
+zip -r elektronswer-win32.zip ../Elektronswer-win32-ia32
 
 echo "Packing mac"
 ## Mac
 #64Bit
-zip -r elektronswer-mac64.zip Elektronswer-darwin-x64
+zip -r elektronswer-mac64.zip ../Elektronswer-darwin-x64
 
 echo "Fixing permissions"
 chmod a+r elektronswer-*
@@ -41,4 +41,3 @@ bye
 End-Of-Session
 
 echo "Done deploying!"
-return 0
