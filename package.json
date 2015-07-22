@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "buildAll": "electron-packager ./ Elektronswer all"
   },
   "author": "Rickard Doverfelt, Simon Johansson",
   "license": "MIT",
