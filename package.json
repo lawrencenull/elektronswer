@@ -11,6 +11,7 @@
   "author": "Rickard Doverfelt, Simon Johansson",
   "license": "MIT",
   "devDependencies": {
+    "electron-packager": "^5.0.1",
     "electron-prebuilt": "^0.29.2",
     "fs-extra": "^0.22.1"
   }
