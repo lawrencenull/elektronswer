@@ -1,8 +1,9 @@
-#Elektronswer
+#Elektronswer [![Build Status](https://travis-ci.org/solvillan/elektronswer.svg?branch=master)](https://travis-ci.org/solvillan/elektronswer)
 Elektronswer is a webbrowser based on [electron](http://electron.atom.io). It is set to be a simple, minimalistically designed and moddable webbrowser. It is compleatly based upon web technologies such as HTML5, JS and CSS.
 
 ###Download
-Precompiled distributions will arrive soon...
+Downloads can be found at [our download page](http://elektronswer.doverfelt.se).
+They still doesn't have installers, but is rather just archives containing an executable and all necessary files.
 
 ###Building
 To build the project you need [Node.js](http://www.nodejs.org) and NPM.
