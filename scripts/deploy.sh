@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Remove bogus license
-rm /home/travis/build/solvillan/elektronswer/Elektronswer-*/LICENSE
+rm *Elektronswer-*/LICENSE
 
 ## Linux
 echo "Packing linux"
