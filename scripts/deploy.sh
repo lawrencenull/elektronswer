@@ -24,11 +24,15 @@ zip -r elektronswer-win32-$TRAVIS_BUILD_NUMBER.zip Elektronswer-win32-ia32
 echo "Packing mac"
 ## Mac
 #64Bit
-rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-darwin-x64/resources/app/Elektronswer-*
+rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-darwin-x64/Elektronswer.app/Contents/Resources/app/Elektronswer-*
 zip -r elektronswer-mac64-$TRAVIS_BUILD_NUMBER.zip Elektronswer-darwin-x64
 
 echo "Fixing permissions"
-chmod a+rw elektronswer-*
+chmod a+rw elektronswer-mac64-$TRAVIS_BUILD_NUMBER.zip
+chmod a+rw elektronswer-win32-$TRAVIS_BUILD_NUMBER.zip
+chmod a+rw elektronswer-win64-$TRAVIS_BUILD_NUMBER.zip
+chmod a+rw elektronswer-linux64-$TRAVIS_BUILD_NUMBER.tar.gz
+chmod a+rw elektronswer-linux32-$TRAVIS_BUILD_NUMBER.tar.gz
 
 echo "Generate webpage"
 
@@ -53,6 +57,8 @@ echo "<!DOCTYPE html>
 " > index.html
 
 chmod a+rw index.html
+
+#chown http elektronswer-mac64-$TRAVIS_BUILD_NUMBER.zip elektronswer-win32-$TRAVIS_BUILD_NUMBER.zip elektronswer-win64-$TRAVIS_BUILD_NUMBER.zip elektronswer-linux64-$TRAVIS_BUILD_NUMBER.tar.gz elektronswer-linux32-$TRAVIS_BUILD_NUMBER.tar.gz index.html
 
 echo "Starting upload"
 
