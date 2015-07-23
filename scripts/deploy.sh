@@ -15,16 +15,16 @@ tar -zcvf elektronswer-linux32-$TRAVIS_BUILD_NUMBER.tar.gz Elektronswer-linux-ia
 ## Windows
 echo "Packing windows"
 #64Bit
-rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-linux-x64/resources/app/Elektronswer-*
+rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-win32-x64/resources/app/Elektronswer-*
 zip -r elektronswer-win64-$TRAVIS_BUILD_NUMBER.zip Elektronswer-win32-x64
 #32Bit
-rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-linux-x64/resources/app/Elektronswer-*
+rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-win32-ia32/resources/app/Elektronswer-*
 zip -r elektronswer-win32-$TRAVIS_BUILD_NUMBER.zip Elektronswer-win32-ia32
 
 echo "Packing mac"
 ## Mac
 #64Bit
-rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-linux-x64/resources/app/Elektronswer-*
+rm -rf /home/travis/build/solvillan/elektronswer/Elektronswer-darwin-x64/resources/app/Elektronswer-*
 zip -r elektronswer-mac64-$TRAVIS_BUILD_NUMBER.zip Elektronswer-darwin-x64
 
 echo "Fixing permissions"
