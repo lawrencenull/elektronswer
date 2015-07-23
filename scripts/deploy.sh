@@ -26,16 +26,18 @@ echo "Fixing permissions"
 chmod a+r elektronswer-*
 
 echo "Starting upload"
-ftp -n $FTP_SERVER <<End-Of-Session
-user $FTP_USER "$FTP_PASS"
+
+echo "open $FTP_SERVER
+user $FTP_USER \"$FTP_PASS\"
 binary
 cd /srv/http/
-put "elektronswer-linux64.tar.gz"
-put "elektronswer-linux32.tar.gz"
-put "elektronswer-win64.zip"
-put "elektronswer-win32.zip"
-put "elektronswer-mac64.zip"
-bye
-End-Of-Session
+put elektronswer-linux64.tar.gz
+put elektronswer-linux32.tar.gz
+put elektronswer-win64.zip
+put elektronswer-win32.zip
+put elektronswer-mac64.zip
+bye" > upload
+
+lftp -f upload
 
 echo "Done deploying!"
