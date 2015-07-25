@@ -3,18 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Elektronswer</title>
+    <link rel="stylesheet" href="css/mainWindow.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/mainWindow_dark.css" media="screen" title="no title" charset="utf-8">
   </head>
-  <body>
-    <header>
+  <body onload="onLoad();">
+    <header id="tabFrame">
       <ul id="tabContainer">
         <li class="tab active">Tab 1</li>
         <li class="tab">Tab 2</li>
       </ul>
-
-      <button type="button" name="button">_</button>
-      <button type="button" name="button2">!</button>
-      <button type="button" name="dark" class="themeBtn leftBtn selectedBtn" onclick="doClose();">Dark</button>
+      <div id="btnContaier">
+        <button type="button" name="minBtn" class="frameBtn">_</button>
+        <button type="button" name="maxBtn" class="frameBtn">!</button>
+        <button type="button" name="closeBtn" class="frameBtn closeBtn" onclick="doClose();">X</button>
+      </div>
     </header>
+
+    <iframe disablewebsecurity nodeintegration class="browser" src="index.html" />
+
     <script src="tabController.js"></script>
   </body>
 </html>

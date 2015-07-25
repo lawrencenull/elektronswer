@@ -21,9 +21,10 @@ app.on('ready', function() {
     height: 800,
     "auto-hide-menu-bar": true,
     "use-content-size": true,
-    "node-intergration": true
+    "node-intergration": true,
+    frame: false
   });
-  mainWindow.loadUrl("file://" + __dirname + "/index.html");
+  mainWindow.loadUrl("file://" + __dirname + "/mainWindow.html");
   mainWindow.on('closed', function() {
     mainWindow = null;
   });

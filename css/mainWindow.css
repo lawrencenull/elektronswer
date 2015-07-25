@@ -1,0 +1,53 @@
+#tabFrame {
+  -webkit-app-region: drag;
+  height: 40px;
+}
+
+.frameBtn {
+  -webkit-app-region: no-drag;
+  border: none;
+  font-size: 18px;
+  /*display: inline;*/
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.browser {
+  bottom: 0px;
+}
+
+#tabContainer {
+  display: inline;
+  float: left;
+}
+
+#btnContainer {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  left: auto;
+  bottom: auto;
+  width: 10%;
+}
+
+.tab {
+  display: inline;
+  float: left;
+  list-style: none;
+  -webkit-app-region: no-drag;
+}
+
+.browser {
+  position: fixed;
+  top: 40px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+ /*#btnContainer button {
+   float: right;
+ }*/
