@@ -8,7 +8,7 @@ addons:
     - lftp
 before_install: npm i electron-packager -g
 install: npm install
-script: electron-packager ./ Elektronswer --platform=all --arch=all --version=0.29.2
+script: electron-packager ./ Elektronswer --platform=all --arch=all --version=1.14.4
 env:
   global:
   - secure: t/Wes4TgwqYEfbiZHzs0nx8myXQESBPId415Od9jbFgaH58+MV46BY95zoVRr71ME18utdgXkz6lAtJQTW/W4v2HPDdtjd/ptJJTTJ1szOS2iYvYSUyRGYCz0GTCkGhIyQrFpSl4gNebVJvF7tDirgwZ2mHM74hGNi/IwLE8s+gy3nzLbQWLoWBZFytlb+WLbd/v70A4zyKjy+/n5U424ecBlFiCxhXym7ECIRDW42manwshceaRPsV22kN2IfPsGabA1wm0EOylj1TlN0ZBPUj/KkOc0i0fHlz7tD9pJSkckXJCTpyCyeq7SaMqno16ztDU8XmSvFlV8xKYe8uW/s6E1GqtfvBxHcj9clYH8/xmI02i7HQDgc7SDuB6N6WUxKVd931Xn/08cGUk59DgrfGcyCg/BFQbOTt6ugfZwir8B/bcw9eQT+/jzR5PUiDuu+Me1OMIeE7TxOKdfaPctxULE+2OrpzomTiwzfvM4LaBwWXUsUv6NUZRnP1YbcK54JBL6ypxbYigbAa7Ol3gZ+C+0nbEy2OxmRdfQjjPh98xSRgWw5e12yvOLbz1unoIJ3KauXUo/xNe49q42K/XQExAEpgrU48DX14VpoMRwq/KYTO25JKYFaFvw8lF/dxYnPVQ7GsFV8akJYhQC2odMf8EjlDPLJdoBZUZa5YHm30=
