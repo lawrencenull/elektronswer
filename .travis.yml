@@ -6,6 +6,7 @@ addons:
   apt:
     packages:
     - lftp
+    - wine
 before_install: npm i electron-packager -g
 install: npm install
 script: electron-packager ./ Elektronswer --all
