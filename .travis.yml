@@ -1,13 +1,13 @@
+dist: trusty
 language: node_js
 node_js:
 - '6.1'
-sudo: false
-addons:
-  apt:
-    packages:
-    - lftp
-    - wine
-before_install: npm i electron-packager -g
+sudo: true
+before_install:
+    - npm i electron-packager -g
+    - sudo dpkg --add-architecture i386
+    - sudo apt-get -qq update
+    - sudo apt-get install wine1.6 lftp
 install: npm install
 script: electron-packager ./ Elektronswer --all
 env:
