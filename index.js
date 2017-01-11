@@ -1,6 +1,6 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
-var ipc = require('ipc');
+const {app, BrowserWindow, ipc} = require('electron');
+/*var BrowserWindow = require('electron');
+var ipc = require('electron');*/
 var fs = require('fs-extra');
 
 app.on('ready', function() {
@@ -19,11 +19,13 @@ app.on('ready', function() {
   var mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    "auto-hide-menu-bar": true,
-    "use-content-size": true,
-    "node-intergration": true
+    autoHideMenuBar: true,
+    useContentSize: true,
+    webPreferences: {
+        nodeIntergration: true
+    }
   });
-  mainWindow.loadUrl("file://" + __dirname + "/index.html");
+  mainWindow.loadURL("file://" + __dirname + "/index.html");
   mainWindow.on('closed', function() {
     mainWindow = null;
   });

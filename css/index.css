@@ -75,12 +75,23 @@ button {
 }
 
 #pageView {
-  position: fixed;
-  z-index: -2;
-  top: 60px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+    position: fixed;
+    z-index: -2;
+    top: 60px;
+    bottom: 0px;
+    left: 50px;
+    right: 0px;
+    display: flex;
+}
+
+webview {
+    position: fixed;
+    z-index: -2;
+    top: 60px;
+    bottom: 0px;
+    left: 50px;
+    right: 0px;
+    display: none;
 }
 
 .pref {
@@ -104,6 +115,7 @@ button {
   display: none;
   opacity: 0;
   transition: opacity 0.25s;
+  overflow: hidden;
 }
 
 #history ul {
@@ -117,4 +129,38 @@ button {
   margin: 0px;
   list-style: none;
   overflow: hidden;
+}
+
+.tabs {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 60px;
+    background: #545454;
+    width: 50px;
+}
+
+.tabs ul {
+    margin: 0;
+    padding: 0;
+}
+
+.tabs ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tab {
+    width: 50px;
+    height: 50px;
+}
+
+.tab img {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

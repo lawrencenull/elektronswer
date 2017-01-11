@@ -1,4 +1,4 @@
-var ipc = require('ipc');
+const {ipc} = require('electron');
 var fs = require('fs-extra');
 var config = require('./configUtil.js');
 var historyUtil = require('./historyUtil.js');
@@ -28,6 +28,10 @@ function onLoad() {
   }
   setTheme();
   onResize();
+  var views = document.getElementsByClassName('tabView');
+  for (var i = 0; i < views.length; i++) {
+      initEventListeners(views[i]);
+  }
 }
 
 function setTheme() {
@@ -72,22 +76,26 @@ function onResize() {
                        html.clientHeight, html.scrollHeight, html.offsetHeight );
 
   prefPane.style.height = (height - 50) + 'px';
-  var rect = bar.getBoundingClientRect();
-  historyPane.style.height = (height*0.25) + 'px';
-  historyPane.style.width = (rect.right - rect.left) + 'px';
-  historyPane.style.top = rect.bottom + 'px';
-  historyPane.style.left = getOffset(bar).left + 'px';
+  sizeHistoryArea();
+}
 
+function sizeHistoryArea() {
+    var body = document.body, html = document.documentElement;
+    var rect = bar.getBoundingClientRect();
+    historyPane.style.height = Math.min(historyPane.lastChild.getBoundingClientRect().bottom - historyPane.lastChild.getBoundingClientRect().top, Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) + 'px';
+    historyPane.style.width = (rect.right - rect.left) + 'px';
+    historyPane.style.top = rect.bottom + 'px';
+    historyPane.style.left = getOffset(bar).left + 'px';
 }
 
 function goToPage() {
   var url;
-  if (!bar.value.contains("http://") && !bar.value.contains("https://") && !bar.value.contains("file://") && !bar.value.contains('g:')) {
+  if (!bar.value.contains("http://") && !bar.value.contains("https://") && !bar.value.contains("file://") && bar.value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) != null) {
     url = "http://" + bar.value;
-  } else if (bar.value.contains("g:")) {
-    url = 'https://www.google.se/#q=' + bar.value.substr(2);
-  } else {
+  } else if (bar.value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) != null) {
     url = bar.value;
+  } else {
+    url = 'https://www.google.se/#q=' + bar.value;
   }
   inHistory = false;
   curHistory = 0;
@@ -160,7 +168,8 @@ function updateHistory() {
   out += "</ul>"
 
   historyPane.innerHTML = out;
-  historyPane.style.height = Math.min(count*25, Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) + 'px';
+  //historyPane.style.height = Math.min(count*25, Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )*0.25) + 'px';
+  sizeHistoryArea();
 }
 
 bar.addEventListener('focus', function() {
@@ -183,35 +192,13 @@ document.addEventListener("keyup", function(e) {
   }
 }, false);
 
-webview.addEventListener('did-stop-loading', function() {
-  document.getElementById("loadingOverlay").style.opacity = 0;
-  window.setTimeout(function() {
-    document.getElementById("loadingOverlay").style.display = 'none';
-  }, 500);
-});
+function getCurrentTabButton() {
+    return document.getElementsByClassName('tab active')[0];
+}
 
-webview.addEventListener('did-finish-load', function() {
-  historyUtil.addHistory(webview.getUrl());
-  bar.value = webview.getUrl();
-});
-
-webview.addEventListener('did-start-loading', function(status) {
-  if (webview.isWaitingForResponse()) {
-    doneLoading = false;
-    document.getElementById("loadingOverlay").style.display = 'block';
-    document.getElementById("loadingOverlay").style.opacity = 100;
-  } else {
-    doneLoading = true;
-  }
-});
-
-webview.addEventListener('page-title-set', function(e) {
-    document.title = e.title + " - Elektronswer 1.0";
-});
-
-webview.addEventListener('dom-ready', function() {
-  injectScrollbar();
-})
+function setCurrentTabIcon(iconUrl) {
+    getCurrentTabButton().firstChild.src = iconUrl;
+}
 
 function injectScrollbar() {
   var theme = config.getProperty('theme');
@@ -235,6 +222,21 @@ function goForw() {
   webview.goForward();
 }
 
+function openTab(tabButton) {
+    webview.removeAttribute('id');
+    var views = document.getElementsByClassName('tabView');
+    for (var i = 0; i < views.length; i++) {
+        if (views[i].dataset.tabId == tabButton.dataset.tabId) {
+            views[i].setAttribute('id', 'pageView');
+            webview = views[i];
+            break;
+        }
+    }
+    getCurrentTabButton().classList.remove('active');
+    tabButton.classList.add('active');
+    bar.value = webview.getURL();
+}
+
 function togglePref() {
   prefPane.style.height = window.height - 50;
   if (!prefPaneOut) {
@@ -243,4 +245,43 @@ function togglePref() {
     prefPane.style.left="100%";
   }
   prefPaneOut = !prefPaneOut;
+}
+
+function initEventListeners(webview) {
+    webview.addEventListener('did-finish-load', function() {
+        console.log('Finished loading!');
+        historyUtil.addHistory(webview.getURL());
+        bar.value = webview.getURL();
+    });
+
+    webview.addEventListener('page-favicon-updated', (ev) => {
+        console.log('ICONS: ' + ev.favicons);
+        setCurrentTabIcon(ev.favicons[0]);
+    })
+
+    webview.addEventListener('did-start-loading', function(status) {
+      if (webview.isWaitingForResponse()) {
+        doneLoading = false;
+        document.getElementById("loadingOverlay").style.display = 'block';
+        document.getElementById("loadingOverlay").style.opacity = 100;
+      } else {
+        doneLoading = true;
+      }
+    });
+
+    webview.addEventListener('page-title-set', function(e) {
+        document.title = e.title + " - Elektronswer 1.0";
+    });
+
+    webview.addEventListener('dom-ready', function() {
+      injectScrollbar();
+    })
+
+    webview.addEventListener('did-stop-loading', function() {
+      document.getElementById("loadingOverlay").style.opacity = 0;
+      console.log('Stopped loading!');
+      window.setTimeout(function() {
+        document.getElementById("loadingOverlay").style.display = 'none';
+      }, 500);
+    });
 }
