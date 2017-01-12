@@ -12,6 +12,9 @@ var prefPaneOut = false;
 var doneLoading = false;
 var curHistory = 0;
 var inHistory = false;
+var tabCount = 0;
+var curTab = 0;
+var tabIDs = [];
 
 if (typeof String.prototype.contains === 'undefined') {
   String.prototype.contains = function(it) {
@@ -31,6 +34,10 @@ function onLoad() {
   var views = document.getElementsByClassName('tabView');
   for (var i = 0; i < views.length; i++) {
       initEventListeners(views[i]);
+  }
+  var tabButtons = document.getElementsByClassName('tab');
+  for (var i = 0; i < tabButtons.length; i++) {
+      initButtonListeners(tabButtons[i]);
   }
 }
 
@@ -151,6 +158,28 @@ bar.addEventListener("keyup", function(e) {
 
 bar.addEventListener('input', updateHistory());
 
+document.addEventListener("keyup", function(e) {
+    if (e.keyCode == 9 && e.ctrlKey && !e.shiftKey) {
+        if (curTab < tabIDs.length-1) {
+            curTab++;
+            openTabID(curTab);
+        } else {
+            curTab = 0;
+            openTabID(curTab);
+        }
+    }
+
+    if (e.keyCode == 9 && e.ctrlKey && e.shiftKey) {
+        if (curTab > 0) {
+            curTab--;
+            openTabID(curTab);
+        } else {
+            curTab = tabIDs.length-1;
+            openTabID(curTab);
+        }
+    }
+});
+
 function updateHistory() {
   var out = "<ul>";
   var body = document.body, html = document.documentElement;
@@ -229,12 +258,88 @@ function openTab(tabButton) {
         if (views[i].dataset.tabId == tabButton.dataset.tabId) {
             views[i].setAttribute('id', 'pageView');
             webview = views[i];
+            curTab = views[i].dataset.tabId;
             break;
         }
     }
-    getCurrentTabButton().classList.remove('active');
+    if (getCurrentTabButton() != undefined) getCurrentTabButton().classList.remove('active');
     tabButton.classList.add('active');
     bar.value = webview.getURL();
+}
+
+function openTabID(id) {
+    console.log(tabIDs);
+    console.log("Open tab index " + id + " id " + tabIDs[id]);
+    webview.removeAttribute('id');
+    var views = document.getElementsByClassName('tabView');
+    for (var i = 0; i < views.length; i++) {
+        if (views[i].dataset.tabId == tabIDs[id]) {
+            views[i].setAttribute('id', 'pageView');
+            webview = views[i];
+            curTab = id;
+            break;
+        }
+    }
+    if (getCurrentTabButton != undefined) getCurrentTabButton().classList.remove('active');
+    var tabButtons = document.getElementsByClassName('tab');
+    for (var i = 0; i < tabButtons.length; i++) {
+        if (tabButtons[i].dataset.tabId == tabIDs[id]) {
+            tabButtons[i].classList.add('active');
+            break;
+        }
+    }
+    bar.value = webview.getURL();
+}
+
+function addTab() {
+    var tabList = document.querySelector('.tabs ul ul');
+    var newTabButton = document.createElement('li');
+    var buttonImg = document.createElement('img');
+    var container = document.querySelector('.viewContainer ul');
+    var newView = document.createElement('webview');
+
+    newTabButton.appendChild(buttonImg);
+    tabList.appendChild(newTabButton);
+    container.appendChild(newView);
+
+    var home = config.getProperty('home');
+    if (home && home !== "") {
+      newView.setAttribute("src", home);
+    } else {
+      newView.setAttribute("src", "file://" + __dirname + "/pages/startPage.html");
+    }
+
+    newTabButton.dataset.tabId = tabCount + 1;
+    newView.dataset.tabId = tabCount + 1;
+
+    newTabButton.classList.add('tab');
+    newView.classList.add('tabView');
+
+    initEventListeners(newView);
+    initButtonListeners(newTabButton);
+    openTab(newTabButton);
+}
+
+function removeTab(tabButton) {
+    var views = document.getElementsByClassName('tabView');
+    for (var i = 0; i < views.length; i++) {
+        if (views[i].dataset.tabId == tabButton.dataset.tabId) {
+            console.log("View in remove");
+            if (webview.dataset.tabId == views[i].dataset.tabId) {
+                console.log("Tab will be opened");
+                openTabID(Math.max(tabIDs.indexOf('' + (webview.dataset.tabId - 1)), 0));
+            }
+            views[i].remove();
+            break;
+        }
+    }
+    for (var i = 0; i < tabIDs.length; i++) {
+        if (tabIDs[i] == tabButton.dataset.tabId) {
+            tabIDs.splice(i, 1);
+            break;
+        }
+    }
+    tabButton.remove();
 }
 
 function togglePref() {
@@ -284,4 +389,29 @@ function initEventListeners(webview) {
         document.getElementById("loadingOverlay").style.display = 'none';
       }, 500);
     });
+    tabCount++;
+    tabIDs.push(webview.dataset.tabId);
+}
+
+tabClicked = function(e) {
+    console.log("Tab clicked!");
+    e = e || window.event;
+    var target = e.target || e.srcElement;
+    if (e.button == 1) {
+        if (e.target.tagName == 'LI') {
+            removeTab(e.target);
+        } else {
+            removeTab(e.target.parentElement);
+        }
+    } else {
+        if (e.target.tagName == 'LI') {
+            openTab(e.target);
+        } else {
+            openTab(e.target.parentElement);
+        }
+    }
+};
+
+function initButtonListeners(tabButton) {
+    tabButton.addEventListener('click', tabClicked);
 }

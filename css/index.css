@@ -145,7 +145,19 @@ webview {
     padding: 0;
 }
 
+.tabs ul ul {
+    margin: 0;
+    padding: 0;
+}
+
+
 .tabs ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tabs ul ul li {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -157,6 +169,10 @@ webview {
     transition: background-color .15s ease-in;
 }
 
+.tab:hover {
+    background-color: #8b8b8b;
+}
+
 .tab img {
     width: 16px;
     height: 16px;
@@ -164,4 +180,17 @@ webview {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.addTab {
+    cursor: pointer;
+    text-align: center;
+    font-size: 32px;
+    color: rgb(218, 218, 218);
+    height: 50px;
+    width: 50px;
+}
+
+.addTab:hover {
+    background-color: #8b8b8b;
 }

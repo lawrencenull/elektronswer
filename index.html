@@ -26,21 +26,21 @@
 
     <aside class="tabs">
         <ul>
-            <li class="tab active" onclick="openTab(this);" data-tab-id="1"><img/></li>
-            <li class="tab" onclick="openTab(this);" data-tab-id="2"><img/></li>
+            <ul>
+                <li class="tab active" data-tab-id="1"><img/></li>
+            </ul>
+            <li class="addTab" onclick="addTab();">+</li>
         </ul>
     </aside>
 
     <!-- NOTE: webview -->
-    <section>
+    <section class="viewContainer">
       <div id="loadingOverlay">
         <img src="img/ring-alt.svg">
       </div>
       <ul>
           <webview src="http://github.com" class="tabView" id="pageView" data-tab-id="1"></webview>
-          <webview src="http://github.com" class="tabView" data-tab-id="2"></webview>
       </ul>
-
     </section>
 
     <!-- TODO: PreloadScript injecting node -->
