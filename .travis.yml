@@ -21,10 +21,10 @@ deploy:
   api_key:
     secure: gob197yog0U7Pzr/rAS9XqCSJubNpTcSqHJpVlM9YKfVRBdSR770/cn2lYl1YdNlIkoXZUlLsmetG/dTpnytKXK8GyI5FLgO1BdaWgFKfYoWcEbQoESnnDF/GKW4zDfE4Kxl9yJZmR3xrgJ3FLhWUDq1K93P1oi/716jsYMXfOkPtNu6vngLgM0CzhKtjpGvlC6iTCqf3Qx6xs6i2w5Gs3mdQeghzIpxOd2a4Q8HqucO769zORPQGt6DZi2lbhNr5SwKcvTyxCcJEJIvfS6dveYfAl6lkVukjHXBu3kefbSlpyIvC6MOM58E1K+2Z+tRU83s9np486rMvGXGpwBklDg1Gcrq7gZuBN8Nkj4ZrypqaPVLKxwp1MF/6MGoGMNXcBkSZcg366KN7AMpWAmNvXkaDG9ZImhLfAsM3r34ukhvduOSRTZqUMIg+yet8S2SBKPTyoiWeRFKaHZ0AjITJJmUGLgwp9XzyrC6C8JaDZ2TyiuYL9eYoTVx0tqIQOOsBpirC2FP/PsQpiKSgnjlD/+EcTzCaIJhKyzahjKxgPDOESEYt+IQzU/G4ExNA2wHWNGimGLKYzr8kRWwNs/wNIgF9x6NpXS3EyCpLuWO4pDqrESYWO0+5fY+aCYPZKr2/rAOMzKA33OZOQyQ44kGBr5maQfwf+AfQTPYmLX9gbc=
   file:
-  - elektronswer-mac64.zip
-  - elektronswer-win32.zip
-  - elektronswer-win64.zip
-  - elektronswer-linux64.tar.gz
-  - elektronswer-linux32.tar.gz
+  - /home/travis/build/solvillan/elektronswer/elektronswer-mac64.zip
+  - /home/travis/build/solvillan/elektronswer/elektronswer-win32.zip
+  - /home/travis/build/solvillan/elektronswer/elektronswer-win64.zip
+  - /home/travis/build/solvillan/elektronswer/elektronswer-linux64.tar.gz
+  - /home/travis/build/solvillan/elektronswer/elektronswer-linux32.tar.gz
   on:
     repo: solvillan/elektronswer
